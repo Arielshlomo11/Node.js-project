@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Product - Detail</title>
+    <link rel="stylesheet" href="../css/login.css" />
+    <link rel="stylesheet" href="../css/product-detail.css" />
+    <script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-app.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-auth.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-firestore.js"></script>
+    <script src="../js/init-firebase.js"></script>
+    <style>
+      .container {
+        max-width: 50vw !important;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="container">
+      <div class="card">
+        <h2>Product Detail</h2>
+        <div class="m-auto text-center" id="product-image-panel">
+          <img
+            class="product-img"
+            src="https://www.shutterstock.com/image-photo/red-apple-isolated-on-white-600nw-1727544364.jpg"
+          />
+        </div>
+        <div id="product-description-panel"></div>
+        <div id="action-panel"></div>
+      </div>
+    </div>
+  </body>
+  <script src="../js/data-manipulation.js"></script>
+  <script>
+    document.addEventListener("DOMContentLoaded", function () {
+      var productImage = document.getElementById("product-image-panel");
+      var productDetail = document.getElementById("product-description-panel");
+
+      var productData = JSON.parse(localStorage.getItem("selectedProductData"));
+      var productDataId = localStorage.getItem("selectedProductId");
+
+      if (productData) {
+        productImage.innerHTML = `
+          <img class="product-img" src="${productData.image}" />
+        `;
+
+        productDetail.innerHTML = `
+          <p>SKU : <b>${productDataId}</b></p>
+          <p>Name : <b>${productData.name}</b></p>
+          <p>Description : <b>${productData.description}</b></p>
+          <p>Category : <b>${productData.category}</b></p>
+          <p>Price : <b>${productData.price}</b></p>
+        `;
+      } else {
+        alert("No product data found.");
+      }
+
+      setTimeout(() => {
+        if (
+          productData.userId &&
+          productData.userId == firebase.auth().currentUser.uid
+        ) {
+          var productAction = document.getElementById("action-panel");
+          productAction.innerHTML = `
+        <button onclick="getProductById(event, '${productDataId}', 'update')">Edit</button>
+        <button onclick="deleteProductById(event, '${productDataId}')">Delete</button>
+        `;
+        }
+      }, 1000);
+    });
+  </script>
+</html>

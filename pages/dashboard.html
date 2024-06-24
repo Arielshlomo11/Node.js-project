@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <link rel="stylesheet" href="../css/dashboard.css" />
+    <script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-app.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-auth.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-firestore.js"></script>
+    <script src="../js/init-firebase.js"></script>
+    <script src="../js/auth.js"></script>
+  </head>
+  <body>
+    <div class="filter-section filter-section-2">
+      <div></div>
+      <div>
+        <a class="signout-button" onclick="signOut(event)">Sign Out</a>
+      </div>
+    </div>
+    <div class="filter-section">
+      <input type="text" id="search-filter" onchange="filterData(event)" placeholder="Search for cateogry or price" />
+      <div>
+        <a class="link-button" onclick="generateRandomProduct(event)">Generate Random Product</a>
+        <a class="link-button" href="./product.html">Add Product</a>
+      </div>
+    </div>
+    <table class="table">
+      <thead>
+        <tr>
+          <th>Image</th>
+          <th>Product Name</th>
+          <th>Description</th>
+          <th>Category</th>
+          <th>Price</th>
+          <th>Action</th>
+        </tr>
+      </thead>
+      <tbody id="table-content"></tbody>
+    </table>
+    <ul id="productList"></ul>
+  </body>
+  <script src="../js/data-manipulation.js"></script>
+</html>

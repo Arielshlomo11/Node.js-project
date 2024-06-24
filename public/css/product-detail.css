@@ -1,0 +1,14 @@
+.product-img {
+  width: 150px;
+  height: 150px;
+  margin: auto;
+  border-radius: 50%;
+}
+
+.m-auto {
+  margin: auto;
+}
+
+.text-center {
+  text-align: center;
+}
